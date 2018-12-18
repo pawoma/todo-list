@@ -5,7 +5,7 @@
 'use strict';
 
 function save(e) {
-  var theValue = document.querySelector('#textarea').value
+  var theValue = document.querySelector('.textarea').value
   if (!theValue) {
     console.log('input content is null');
     return;
@@ -18,7 +18,7 @@ function save(e) {
     renderTodoList(list)
 
     setTodoList(list, function () {
-      document.querySelector('#textarea').value = ''
+      document.querySelector('.textarea').value = ''
     })
   })
 }
@@ -42,10 +42,10 @@ function setTodoList(data, callback) {
 }
 
 function renderTodoList(list) {
-  var listWrap = document.querySelector('#todo-list');
+  var listWrap = document.querySelector('.todo-list');
   var html = ''
-  list.forEach(function (value) {
-    html += '<li>' + value + '<input type="checkbox" /></li>'
+  list.forEach(function (value, index) {
+    html += '<li><input id="' + index + '" type="checkbox" /><label for="' + index + '">' + value + '</label></li>'
   })
   listWrap.innerHTML = html
 }
