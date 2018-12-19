@@ -9,6 +9,7 @@
     * {
       padding: 0;
       margin: 0;
+      box-sizing: border-box;
     }
 
     body {
@@ -32,28 +33,47 @@
       list-style: none;
     }
 
-    .textarea {
+    #input {
       width: 90%;
       display: block;
     }
 
     .todo-wrap {
-      width: 90%;
+      /* width: 90%; */
       border-radius: 5px;
       /* border: solid 1px #ccc; */
     }
 
     .todo-list li {
-      line-height: 20px;
       background: #dffdb5;
       color: #70d18d;
-      border-bottom:solid 1px #ccc;
-      padding:3px 5px;
+      border-bottom: solid 1px #bfe38d;
+      padding: 5px;
+      width: 100%;
+      display: flex;
+      cursor: pointer;
+      align-items: baseline;
+      justify-content: space-between;
+      line-height: 1.5;
+    }
+    .todo-list li:hover .remove-link{
+      opacity: 1;
+    }
+    .todo-list li label{
+      word-wrap: break-word;
+      width: 82%;
+    }
+    .todo-list li .remove-link{
+      font-size:12px;
+      color:#ccc;
+      opacity: 0;
     }
 
-    .done {
+    .todo-list .done {
       background: #fffc9f;
       color: #fba750;
+    }
+    .todo-list .done label{
       text-decoration: line-through;
     }
 
@@ -62,45 +82,90 @@
       margin-top: 20px;
     }
     .input-box b{
-      white-space: nowrap
+      white-space: nowrap;
+      font-size:12px;
     }
-    .input-box .textarea {
+    #input {
       border-color: #ccc;
       width: 90%;
       padding:3px;
     }
 
     .btn-box {
-      margin-top: 20px;
+      margin-top: 25px;
       text-align: right;
+      display: flex;
+      justify-content: space-between;
     }
 
     .btn-box button {
-      width: 100px;
       text-align: center;
-      line-height: 32px;
-      background: #1976ef;
+      line-height: 28px;
+      height:28px;
+      padding:0 8px;
+      background: #4caf50;
       color: white;
       border: none;
       outline: none;
       cursor: pointer;
       border-radius: 5px;
     }
+    #archive-btn{
+      background:transparent;
+      border:solid 1px #FF5722;
+      color:#FF5722;
+    }
+    .total-box{
+      font-size:12px;
+      margin-top:10px;
+    }
+    .total-box span{
+      font-weight: bold;
+    }
+    #done-count{
+      color:#70d18d;
+    }
+    .wrap-title{
+      margin-bottom:12px;
+      font-size:14px;
+    }
   </style>
-  <script src="popup.js"></script>
+  <script type="text/javascript" src="lib/jquery.min.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
 </head>
 
 <body>
   <div class="wrap">
+    <h1 class="wrap-title"><span class="cur-date"></span> 任务清单</h1>
     <div class="todo-wrap">
-      <ul class="todo-list"></ul>
-
+      <ul class="todo-list">
+        <li>
+          <input id="1" type="checkbox">
+          <label for="1">teststestewsstestestewsst</label>
+          <span class="remove-link">删除</span>
+        </li>
+        <li>
+          <input id="1" type="checkbox">
+          <label for="1">teststestewsstestestewsst</label>
+          <span class="remove-link">删除</span>
+        </li>
+        <li>
+          <input id="1" type="checkbox">
+          <label for="1">teststestewsstestestewsst</label>
+          <span class="remove-link">删除</span>
+        </li>
+      </ul>
+      <div class="total-box">
+        已完成：<span id="done-count">0</span>&nbsp;/
+        总计：<span id="total-count">0</span>
+      </div>
     </div>
     <div class="input-box">
       <b class="title">任务：</b>
-      <textarea class="textarea" rows="3" placeholder="安排新的任务吧"></textarea>
+      <textarea id="input" rows="3" placeholder="安排新的任务吧"></textarea>
     </div>
     <div class="btn-box">
+      <button id="archive-btn">归档</button>
       <button id="save-btn">保存任务</button>
     </div>
   </div>
